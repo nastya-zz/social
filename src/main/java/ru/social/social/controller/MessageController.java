@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.social.social.domain.Message;
 import ru.social.social.repo.MessageRepo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,8 @@ public class MessageController {
 
     @PostMapping
     public Message create(@RequestBody Message message) {
-        return messageRepo.save(message);
+       message.setCreationDate(LocalDateTime.now());
+       return messageRepo.save(message);
     }
 
     @PutMapping("{id}")
